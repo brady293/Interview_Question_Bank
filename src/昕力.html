@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>昕力JS</title>
+</head>
+
+<body>
+    <!-- 單選1 -->
+    <h1>單選1</h1>
+    <p>5,5,5,5</p>
+    <script>
+        for (var i = 1; i < 5; i++) {
+            setTimeout(function () {
+                console.log(i);
+            }, i * 1000);
+        }
+    </script>
+
+    <!-- 單選2 -->
+    <h1>單選2</h1>
+    <p>1undefined</p>
+    <script>
+        var y = 1;
+        if (function f() {}) {
+            y += typeof f;
+        }
+        console.log(y)
+    </script>
+
+    <!-- 單選3 -->
+    <h1>單選3</h1>
+    <p>how to empty an array in JavaScript?</p>
+
+    <!-- 單選4 -->
+    <h1>單選4</h1>
+    <p>Corrosive:true</p>
+    <p>pH acidic:true</p>
+    <script>
+        var sulphuricAcid = (function () {
+            var corrosive = true;
+            var pH = 2;
+            return {
+                property: function () {
+                    console.log(`Corrosive:${corrosive}`);
+                    console.log(`pH acidic:${pH<7}`);
+                }
+            };
+        })();
+        console.log(sulphuricAcid.pH);
+        sulphuricAcid.property();
+    </script>
+
+    <!-- 單選5 -->
+    <h1>單選5</h1>
+    <p>undefined;2</p>
+    <script>
+        function test(){
+            console.log(a);
+            console.log(foo());
+
+            var a =1;
+            function foo(){
+                return 2;
+            }
+        }
+        test();
+    </script>
+
+    <!-- 單選6 -->
+    <h1>單選6</h1>
+    <p>xyz</p>
+    <script>
+        var Employee = {
+            company:'xyz'
+        }
+        var emp1=Object.create(Employee);
+        delete emp1.company
+        console.log(emp1.company)
+    </script>
+
+    <!-- 單選7 -->
+    <h1>單選7</h1>
+    <p>what are the data types supported by JavaScript?</p>
+
+    <!-- 單選8 -->
+    <h1>單選8</h1>
+    <p>100 ;(3) [200, 330, 400]</p>
+    <script>
+        let c=[100,200,330,400];
+        let [a,...b]=c;
+        console.log(a,b)
+    </script>
+
+    <!-- 單選9 -->
+    <h1>單選9</h1>
+    <p>undefined is undefined years old</p>
+    <script>
+        let People = function(person,age){
+            this.person=person;
+            this.age=age;
+            this.info=function(){
+                setTimeout(function(){
+                    console.log(this.person+"is"+this.age+"years old");
+                },3000);
+            }
+        }
+        let person1= new People('John',21);
+        person1.info();
+    </script>
+
+    <!-- 單選10 -->
+    <h1>單選10</h1>
+    <p>1,truexyz,2,1</p>
+    <script>
+         var bar = true;
+         console.log(bar+0);
+         console.log(bar+"xyz");
+         console.log(bar+true);
+         console.log(bar+false);
+    </script>
+
+    <!-- 簡答題1 -->
+    <h1>簡答題1</h1>
+    <p>Error 1;Success 4</p>
+    <script>
+        function job(){
+            return new Promise(function(resolve,reject){
+                reject();
+            });
+        }
+        let promise = job();
+        promise
+        .then(function(){
+            console.log('Success 1');
+        })
+        .then(function(){
+            console.log('Success 2');
+        })
+        .then(function(){
+            console.log('Success 3');
+        })
+        .catch(function(){
+            console.log('Error 1');
+        })
+        .then(function(){
+            console.log('Success 4');
+        })
+    </script>
+
+    <!-- 簡答題2 -->
+    <h1>簡答題2</h1>
+    <p>Hey friend</p>
+    <script>
+        function*awesomeGenerator(){
+            yield 'Hey friend';
+            console.log('Back again');
+        }
+        var demo = awesomeGenerator();
+        let current = demo.next();
+        if(!current.done){
+            console.log(current.value);
+        }else{
+            console.log('Done!')
+        }
+    </script>
+
+    <!-- 簡答題3 -->
+    <h1>簡答題3</h1>
+    <p>Jack</p>
+    <script>
+        var person = {
+            name:"Jack",
+            prop:{
+                name:"Daniel",
+                getName:function(){
+                    return this.name;
+                }
+            }
+        }
+        var getNameWithBind = person.prop.getName.bind(person);
+        console.log(getNameWithBind());
+    </script>
+
+    <!-- 簡答題4 -->
+    <h1>簡答題4</h1>
+    <p>The sum of 5 and 6 is 11;callback</p>
+    <script>
+        function add(a,b,callback){
+            console.log(`The sum of ${a} and ${b} is ${a+b}`);
+            callback();
+        }
+        add(5,6,function(){
+            console.log('callback');
+        })
+    </script>
+
+    <!-- 簡答題5 -->
+    <h1>簡答題5</h1>
+    <p>這題不知道在幹嘛?XD</p>
+    <script>
+        function Rectangle(height,width){
+            this.height=height;
+            this.width=width;
+        }
+        Rectangle.prototype.area= function(){
+            return this.height*this.width;
+        }
+    </script>
+</body>
+
+</html>
