@@ -73,7 +73,6 @@ function watchfile() {
     watch(['src/*.html', 'src/**/*.html'], includeHTML) // 監看html
     watch('src/js/*.js', moveJs) // 監看js
     watch(['src/images/*.*', 'src/images/**/*.*'], moveImg) // 監看img
-    watch('src/productpages/*.*', moveProductPages) // 監看moveProductPages
     watch(['./src/sass/*.scss', './src/sass/**/*.scss'], styleSass) // 監看sass
 }
 

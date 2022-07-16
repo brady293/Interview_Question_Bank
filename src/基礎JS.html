@@ -12,68 +12,63 @@
     <div id="app">
         <section class="question">
             <div class="container">
-                <base-question></base-question>
+                <base-question v-for="(issueExam,index) in questionObject" :issue-exam="questionObject[index]" :key="issueExam.id"></base-question>
             </div>
         </section>
     </div>
-    <h1>1.</h1>
-    <p>題目:<hr>
-        if(false){<br>
-        var a = 1;<br>
-        let b = 2;<br>
-    }<br>
-    console.log(a);<br>
-    console.log(b);<br></p>
-    <p>輸出:<br>a undefined未明確定義;b is not defined</p>
-    <p>解析:<br>因為if層級高，a進不去=1，但是var a 屬於全域變數，而let b 為區域變數，not defined。</p>
     <script>
-        if(false){
-            var a = 1;
-            let b = 2;
-        }
-        console.log(a);
-        console.log(b);
+        let baseQuestion = Vue.component('base-question',{
+            props: ['issueExam'],
+            template:`<div>
+                <h2 class="ms_4 me_1">{{issueExam.numId}}</h2>
+                <pre><code class="me_1">{{issueExam.quesTion}}</code></pre>
+                <pre><code class="me_1">{{issueExam.consoleLog}}</code></pre>
+                <p class="me_4 solMethods">{{issueExam.solMethods}}</p>
+                </div>`,
+        })
+        new Vue ({
+            el: '#app',
+            data:{
+                questionObject:[
+                    {
+                        numId: `題目：1`,
+                        quesTion: `if ( false ) { 
+    var a = 1; let b = 2; 
+} 
+console.log(a); 
+console.log(b);`,
+                        consoleLog: `a undefined未明確定義; b is not defined`,
+                        solMethods: `解析 : 因為if層級高，a進不去=1，但是var a 屬於全域變數，而let b 為區域變數，not defined。`
+                    },
+                    {
+                        numId: `題目：2`,
+                        quesTion: `var a = 1;
+if ( true ) {
+console.log(a);
+let a = 2;
+}`,
+                        consoleLog: `Cannot access 'a' before initialization`,
+                        solMethods: `解析 : 因為if 提升比var高，先執行，到console.log(a) => 出現還沒執行這一段之前你不能使用這個變數。`
+                    },
+                    {
+                        numId: `題目：3`,
+                        quesTion: `var a = {n:1};
+var b = a;
+a.x = a = {n:2};
+console.log(a.n,b.n);
+console.log(a.x,b.x);`,
+                        consoleLog: `2 1 ; undefined object{n:2}`,
+                        solMethods: `解析 : var a.x =>a擁有一個屬性x;先執行;
+a =物件{n:1} b = a =物件{n:1}且 帶有 a.x =擁有x屬性;
+a = 物件{n:2}(賦值由右至左，創建一個新的a)
+a.x= a 物件{n:2}
+最後 a.n=2; b.n=1; a.x=undefined; b.x=物件{n:2};`
+                    },
+                ],
+            }
+        })
     </script>
 
-    <h1>2.</h1>
-    <p>題目:<hr>
-        var a = 1;<br>
-        if(true){<br>
-            console.log(a);<br>
-            let a =2;<br>
-        }<br>
-    </p>
-    <p>輸出:<br>Cannot access 'a' before initialization</p>
-    <p>解析:<br>因為if 提升比var高，先執行，到console.log(a)=>出現還沒執行這一段之前你不能使用這個變數</p>
-    <script>
-        var a = 1;
-        if(true){
-            console.log(a);
-            let a =2;
-        }
-    </script>
-
-    <h1>3.</h1>
-    <p>題目:<hr>
-        var a = {n:1};<br>
-        var b = a;<br>
-        a.x = a = {n:2};<br>
-        console.log(a.n,b.n);<br>
-        console.log(a.x,b.x); </p>
-    <p>輸出:<br>2 1 <br>
-    undefined object{n:2}</p>
-    <p>解析:<br>
-    var a.x =>a擁有一個屬性x;先執行;<br>
-    a =物件{n:1}<br>
-    b = a =物件{n:1}且 帶有 a.x =擁有x屬性;<br>
-    a =物件{n:2}(賦值由右至左，創建一個新的a)<br>
-    a.x= a 物件{n:2}<br>
-    最後<br>
-    a.n=2;<br>
-    b.n=1;<br>
-    a.x=undefined;<br>
-    b.x=物件{n:2};<br>
-    </p>
     <a href="https://chowdera.com/2022/03/202203110647531104.html">詳解參考</a>
     <script>
         var a = {n:1};

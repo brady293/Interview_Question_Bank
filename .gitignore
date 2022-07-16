@@ -1,7 +1,7 @@
-# .gitignore
+.gitignore
 node_modules
 dist
-# gulpfile.js
-# package-lock.json
-# package.json
+gulpfile.js
+package-lock.json
+package.json
 src/connect_database.php
