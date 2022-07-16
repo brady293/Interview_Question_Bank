@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>基礎JS</title>
+    @@include('layout/meta.html', { "title" : "基礎JS" })
 </head>
 <body>
+    <!-- header -->
+    @@include('layout/header.html')
+    <!-- header end -->
     <a href="https://blog.csdn.net/qq_35721888/article/details/106647403?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~default-1-106647403-blog-105144514.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~default-1-106647403-blog-105144514.pc_relevant_default&utm_relevant_index=1">參考題目連結連結</a>
 
     <h1>1.</h1>
@@ -75,7 +75,9 @@
         console.log(a.n,b.n);
         console.log(a.x,b.x); 
     </script>
-
+    <!-- script -->
+    @@include('layout/script.html')
+    <!-- script end -->
     <!-- 模組 -->
     <!-- <h1>1.</h1>
     <p>題目:<hr></p>

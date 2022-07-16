@@ -2,16 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>昕力JS</title>
+    @@include('layout/meta.html', { "title" : "昕力JS" })
 </head>
 
 <body>
+    <!-- header -->
+    @@include('layout/header.html')
+    <!-- header end -->
     <!-- 單選1 -->
     <h1>單選1</h1>
     <p>5,5,5,5</p>
+    <pre><code>for (var i = 1; i < 5; i++) { setTimeout(function () { console.log(i); }, i * 1000); }</code></pre>
     <script>
         for (var i = 1; i < 5; i++) {
             setTimeout(function () {
@@ -23,6 +24,11 @@
     <!-- 單選2 -->
     <h1>單選2</h1>
     <p>1undefined</p>
+    <pre><code>var y = 1;
+    if (function f() {}) {
+    y += typeof f;
+    }
+    console.log(y)</code></pre>
     <script>
         var y = 1;
         if (function f() {}) {
@@ -39,6 +45,15 @@
     <h1>單選4</h1>
     <p>Corrosive:true</p>
     <p>pH acidic:true</p>
+    <pre><code>
+        var sulphuricAcid = (function () {
+        var corrosive = true;
+        var pH = 2;
+        return {
+        property: function () {
+        console.log(`Corrosive:${corrosive}`);
+        console.log(`pH acidic:${pH<7}`); } }; })(); console.log(sulphuricAcid.pH); sulphuricAcid.property();
+    </code></pre>
     <script>
         var sulphuricAcid = (function () {
             var corrosive = true;
@@ -210,6 +225,10 @@
             return this.height*this.width;
         }
     </script>
+    
+    <!-- script -->
+    @@include('layout/script.html')
+    <!-- script end -->
 </body>
 
 </html>
