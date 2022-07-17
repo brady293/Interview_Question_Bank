@@ -7,7 +7,7 @@
     <!-- header -->
     @@include('layout/header.html')
     <!-- header end -->
-    <a href="https://blog.csdn.net/qq_35721888/article/details/106647403?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~default-1-106647403-blog-105144514.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~default-1-106647403-blog-105144514.pc_relevant_default&utm_relevant_index=1">參考題目連結連結</a>
+    <a href="https://blog.csdn.net/qq_35721888/article/details/106647403?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~default-1-106647403-blog-105144514.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~default-1-106647403-blog-105144514.pc_relevant_default&utm_relevant_index=1">參考題目連結</a>
 
     <div id="app">
         <section class="question">
@@ -117,7 +117,8 @@ c(2);
                         consoleLog: `1
 
 TypeError: c is not a function`,
-                        solMethods: `解析 : 由于函数声明会提升,当函数外的console.log(c)执行时,c已经被赋值为1。因此,执行c(2)时会抛出TypeError,因为1不是函数。`,
+                        solMethods: `解析 : 由于函数声明会提升,当函数外的console.log(c)执行时,c已经被赋值为1。因此,执行c(2)时会抛出TypeError,因为1不是函数。  執行順序:function c => var c = 1 => console.log(c)(出現 1) =>c(2)(出現error);`,
+                        hrefLink:`https://segmentfault.com/a/1190000013562979`,
                     },
                     {
                         numId: `題目：6`,
@@ -130,7 +131,10 @@ TypeError: c is not a function`,
         console.log(name)
     }
 })();`,
-                        consoleLog: `var name = 'erdong';
+                        consoleLog: `chen;
+
+以下是說明順序=>
+var name = 'erdong';
 (function () {
     var name;  // 变量name会提升到当前作用域顶部
     if (typeof name === 'undefined') {
@@ -161,30 +165,28 @@ test();`,
 10
 100
 `,
-                        solMethods: `解析 : test()为函数独立调用,作用域中的this绑定为全局对象window。
+                        solMethods: `解析 : test()为函数独立调用,作用域中的this绑定为全局对象window(若是使用箭頭函式，才可以指向function裡的100)。
 
 test函数执行时,var a被提升到了作用域顶部,因此函数作用域中存在一个变量a。所以在函数中访问的a都是局部作用域中的a。`,
                     },
                     {
                         numId: `題目：8`,
-                        quesTion: `var a = 10;  
-function test() {  
-    a = 100;  
-    console.log(a);  
-    console.log(this.a);  
-    var a;  
-    console.log(a); 
+                        quesTion: `if(!(a in window)){
+var a = 1;
 }
-test();`,
+console.log(a)`,
                         consoleLog: `// 输出
 
-100
-10
-100
-`,
-                        solMethods: `解析 : test()为函数独立调用,作用域中的this绑定为全局对象window。
+undefined
 
-test函数执行时,var a被提升到了作用域顶部,因此函数作用域中存在一个变量a。所以在函数中访问的a都是局部作用域中的a。`,
+以下是說明順序=>
+var a;
+if(!(a in window)){
+    a=1;
+}
+console.log(a);
+`,
+                        solMethods: `解析 :由于if后的{}不会产生區塊作用域(不包含let,const时),裡頭var a相當於全域window.a。因此!(a in window)转成布林值为false,不会执行a = 1。所以console.log(a)输出undefined。`,
                     },
                     {
                         numId: `題目：9`,
@@ -203,7 +205,9 @@ undefined
 
 2
 `,
-                        solMethods: `跟第4题类似。`
+                        solMethods: `跟第4题类似。`,
+                        hrefLink:`https://segmentfault.com/a/1190000013562979`,
+
                     },
                     {
                         numId: `題目：10`,
@@ -220,14 +224,17 @@ var obj={
 obj.del();
 `,
                         consoleLog: `// 输出
-obj(指向的值)
+obj(指向的值)=>
+{val: 2, del: ƒ}
+del: ƒ ()
+val: 4
+[[Prototype]]: Object
 
 1
                         
 `,
                         solMethods: `当通过obj.del()调用del函数时,del函数作用域中的this绑定为obj。
-
-在函数作用域中访问val时,由于函数中并没有变量val,因此实际上访问的是全局作用域中的val,即 1。
+在函数作用域中访问val时,由于del:函数中并没有变量val,故this.val(指的是obj.val)*=2=4,但实际上console.log(val)访问的是全局作用域中的val,即 1。
 
 这里考察的是this的指向,一定要熟练掌握。`
                     },
@@ -256,7 +263,7 @@ erdong
                         consoleLog3: `(function () {
     return this.name;
 })();`,
-                        solMethods3: `此时的this绑定为window。因此输出全局变量name的值erdong。`,
+                        solMethods3: `此时的this绑定为window。因此输出全局变量name的值erdong。第一個function如果有this.name會輸出chen，但是第二個會是訪問全局`,
                     },
                     {
                         numId: `題目：12`,
@@ -294,10 +301,13 @@ true
 false
 `,
                         solMethods: `首先要明白a = b = 3是怎样执行的,伪代码:`,
-                        consoleLog2:`b = 3;
+                        consoleLog2:`賦值順序=>
+b = 3;
 var a = b;
 `,
-                        solMethods2:`因此在自执行函数执行时,b由于为经var等操作符声明,因为为全局变量。a为函数作用域中的变量。因此在外面访问a和b时,其值分别为ReferenceError: a is not defined和3。但是typeof检测未声明的变量不会抛出错误,会返回'undefined'。因此typeof a和typeof b分别返回'undefined'和'number'。`,
+                        solMethods2:`因此在自执行函数执行时,b由于为经var等操作符声明,因为为全局变量。a为函数作用域中的变量。因此在外面访问a和b时,其值分别为ReferenceError: a is not defined和3。但是typeof检测未声明的变量不会抛出错误,会返回'undefined'。因此typeof a和typeof b分别返回'undefined'和'number'。
+                        b=3為全域，因為前面沒有用var宣告，而var a = b不是全域，所以a出不來外面，全域供大家使用，區域不供全域使用，即使是var在function裡也是區域。`,
+                        hrefLink:`https://ithelp.ithome.com.tw/articles/10234400`,
                     },
                     {
                         numId: `題目：14`,
