@@ -167,24 +167,20 @@ test函数执行时,var a被提升到了作用域顶部,因此函数作用域中
                     },
                     {
                         numId: `題目：8`,
-                        quesTion: `var a = 10;  
-function test() {  
-    a = 100;  
-    console.log(a);  
-    console.log(this.a);  
-    var a;  
-    console.log(a); 
+                        quesTion: `if (!(a in window)) {
+    var a = 1;
 }
-test();`,
-                        consoleLog: `// 输出
-
-100
-10
-100
+console.log(a)
 `,
-                        solMethods: `解析 : test()为函数独立调用,作用域中的this绑定为全局对象window。
-
-test函数执行时,var a被提升到了作用域顶部,因此函数作用域中存在一个变量a。所以在函数中访问的a都是局部作用域中的a。`,
+                        consoleLog: `// 输出
+undefined`,
+                        solMethods: `解析 : 由于if后的{}不会产生块级作用域(不包含let,const时),此时的伪代码为:`,
+                        consoleLog2:`var a;
+if (!(a in window)) {
+    a = 1;
+}
+console.log(a);`,
+                        solMethods2:`var a相当于window.a。因此!(a in window)转成布尔值为false,不会执行a = 1。所有console.log(a)输出undefined。`,
                     },
                     {
                         numId: `題目：9`,
