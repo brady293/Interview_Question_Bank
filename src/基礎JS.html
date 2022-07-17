@@ -22,8 +22,25 @@
             template:`<div>
                 <h2 class="ms_4 me_1">{{issueExam.numId}}</h2>
                 <pre><code class="me_1">{{issueExam.quesTion}}</code></pre>
-                <pre><code class="me_1">{{issueExam.consoleLog}}</code></pre>
-                <p class="me_4 solMethods">{{issueExam.solMethods}}</p>
+                <pre><code class="me_1" v-if="issueExam.consoleLog">{{issueExam.consoleLog}}</code></pre>
+                <p class="me_1" v-if="issueExam.solMethods">{{issueExam.solMethods}}</p>
+                <pre><code class="me_1" v-if="issueExam.consoleLog2">{{issueExam.consoleLog2}}</code></pre>
+                <p class="me_1" v-if="issueExam.solMethods2">{{issueExam.solMethods2}}</p>
+                <pre><code class="me_1" v-if="issueExam.consoleLog3">{{issueExam.consoleLog3}}</code></pre>
+                <p class="me_1" v-if="issueExam.solMethods3">{{issueExam.solMethods3}}</p>
+                <pre><code class="me_1" v-if="issueExam.consoleLog4">{{issueExam.consoleLog4}}</code></pre>
+                <p class="me_1" v-if="issueExam.solMethods4">{{issueExam.solMethods4}}</p>
+                <pre><code class="me_1" v-if="issueExam.consoleLog5">{{issueExam.consoleLog5}}</code></pre>
+                <p class="me_1" v-if="issueExam.solMethods5">{{issueExam.solMethods5}}</p>
+                <pre><code class="me_1" v-if="issueExam.consoleLog6">{{issueExam.consoleLog6}}</code></pre>
+                <p class="me_1" v-if="issueExam.solMethods6">{{issueExam.solMethods6}}</p>
+                <pre><code class="me_1" v-if="issueExam.consoleLog7">{{issueExam.consoleLog7}}</code></pre>
+                <p class="me_1" v-if="issueExam.solMethods7">{{issueExam.solMethods7}}</p>
+                <pre><code class="me_1" v-if="issueExam.consoleLog8">{{issueExam.consoleLog8}}</code></pre>
+                <p class="me_1" v-if="issueExam.solMethods8">{{issueExam.solMethods8}}</p>
+                <pre><code class="me_1" v-if="issueExam.consoleLog9">{{issueExam.consoleLog9}}</code></pre>
+                <p class="me_4" v-if="issueExam.solMethods9">{{issueExam.solMethods9}}</p>
+                <a v-if="issueExam.hrefLink" :href="issueExam.hrefLink">參考連結</a>
                 </div>`,
         })
         new Vue ({
@@ -62,20 +79,799 @@ console.log(a.x,b.x);`,
 a =物件{n:1} b = a =物件{n:1}且 帶有 a.x =擁有x屬性;
 a = 物件{n:2}(賦值由右至左，創建一個新的a)
 a.x= a 物件{n:2}
-最後 a.n=2; b.n=1; a.x=undefined; b.x=物件{n:2};`
+最後 a.n=2; b.n=1; a.x=undefined; b.x=物件{n:2};`,
+                        hrefLink: `https://chowdera.com/2022/03/202203110647531104.html`
+                    },
+                    {
+                        numId: `題目：4`,
+                        quesTion: `console.log(c);
+var c;
+function c(a) {
+    console.log(a);
+    var a = 3;
+    function a(){
+    }
+}
+c(2);`,
+                        consoleLog: `function c(){
+    console.log(a);
+    var c = 3;
+    function a(){
+    }
+}
+
+function a(){
+}`,
+                        solMethods: `解析 : 变量提升也有优先级, 函数声明 > arguments > 变量声明`,
+                    },
+                    {
+                        numId: `題目：5`,
+                        quesTion: `var c = 1
+function c(c) {
+    console.log(c);
+    var c = 3;
+}
+console.log(c);
+c(2);
+`,
+                        consoleLog: `1
+
+TypeError: c is not a function`,
+                        solMethods: `解析 : 由于函数声明会提升,当函数外的console.log(c)执行时,c已经被赋值为1。因此,执行c(2)时会抛出TypeError,因为1不是函数。`,
+                    },
+                    {
+                        numId: `題目：6`,
+                        quesTion: `var name = 'erdong';
+(function () {
+    if (typeof name === 'undefined') {
+        var name = 'chen'
+        console.log(name)
+    } else {
+        console.log(name)
+    }
+})();`,
+                        consoleLog: `var name = 'erdong';
+(function () {
+    var name;  // 变量name会提升到当前作用域顶部
+    if (typeof name === 'undefined') {
+        name = 'chen'
+        console.log(name)
+    } else {
+        console.log(name)
+    }
+})();
+                        
+`,
+                        solMethods: `解析 : 所以会执行if中的console.log(name)`,
+                    },
+                    {
+                        numId: `題目：7`,
+                        quesTion: `var a = 10;  
+function test() {  
+    a = 100;  
+    console.log(a);  
+    console.log(this.a);  
+    var a;  
+    console.log(a); 
+}
+test();`,
+                        consoleLog: `// 输出
+
+100
+10
+100
+`,
+                        solMethods: `解析 : test()为函数独立调用,作用域中的this绑定为全局对象window。
+
+test函数执行时,var a被提升到了作用域顶部,因此函数作用域中存在一个变量a。所以在函数中访问的a都是局部作用域中的a。`,
+                    },
+                    {
+                        numId: `題目：8`,
+                        quesTion: `var a = 10;  
+function test() {  
+    a = 100;  
+    console.log(a);  
+    console.log(this.a);  
+    var a;  
+    console.log(a); 
+}
+test();`,
+                        consoleLog: `// 输出
+
+100
+10
+100
+`,
+                        solMethods: `解析 : test()为函数独立调用,作用域中的this绑定为全局对象window。
+
+test函数执行时,var a被提升到了作用域顶部,因此函数作用域中存在一个变量a。所以在函数中访问的a都是局部作用域中的a。`,
+                    },
+                    {
+                        numId: `題目：9`,
+                        quesTion: `var a = 1
+
+function c(a, b) {
+    console.log(a)
+    a = 2
+    console.log(a)
+}
+c()
+`,
+                        consoleLog: `//输出
+
+undefined 
+
+2
+`,
+                        solMethods: `跟第4题类似。`
+                    },
+                    {
+                        numId: `題目：10`,
+                        quesTion: `var val=1;
+var obj={
+    val:2,
+    del:function(){
+        console.log(this);                    
+        this.val*=2
+        console.log(val) 
+    }
+}
+
+obj.del();
+`,
+                        consoleLog: `// 输出
+obj(指向的值)
+
+1
+                        
+`,
+                        solMethods: `当通过obj.del()调用del函数时,del函数作用域中的this绑定为obj。
+
+在函数作用域中访问val时,由于函数中并没有变量val,因此实际上访问的是全局作用域中的val,即 1。
+
+这里考察的是this的指向,一定要熟练掌握。`
+                    },
+                    {
+                        numId: `題目：11`,
+                        quesTion: `var name = "erdong"
+var object = {
+    name: "chen",
+    getNameFunc: function () {
+        return function () {
+            return this.name;
+        }
+    }
+}
+console.log(object.getNameFunc()());
+`,
+                        consoleLog: `// 输出
+
+erdong
+`,
+                        solMethods: `object.getNameFunc()(),先执行object.getNameFunc()返回一个函数:`,
+                        consoleLog2: `function () {
+    return this.name;
+}`,
+                        solMethods2: `返回的函数再执行,相当于`,
+                        consoleLog3: `(function () {
+    return this.name;
+})();`,
+                        solMethods3: `此时的this绑定为window。因此输出全局变量name的值erdong。`,
+                    },
+                    {
+                        numId: `題目：12`,
+                        quesTion: `var name = "erdong"
+var object = {
+    name: "chen",
+    getNameFunc: function () {
+        var that = this;
+        return function () {
+            return that.name;
+        }
+    }
+}
+console.log(object.getNameFunc()());
+                        
+`,
+                        consoleLog: `//输出
+chen
+`,
+                        solMethods: `object.getNameFunc()执行时,此时getNameFunc中的this绑定为object,因此that = object。object.getNameFunc()返回的函数再执行时,产生闭包,因此返回的函数也能访问到外层作用域中的变量that,因此object.name为object.name,即 chen。
+`,
+                    },
+                    {
+                        numId: `題目：13`,
+                        quesTion: `(function() {
+  var a = b = 3;
+})();
+console.log(typeof a === 'undefined');
+console.log(typeof b === 'undefined');
+`,
+                        consoleLog: `// 输出
+
+true
+
+false
+`,
+                        solMethods: `首先要明白a = b = 3是怎样执行的,伪代码:`,
+                        consoleLog2:`b = 3;
+var a = b;
+`,
+                        solMethods2:`因此在自执行函数执行时,b由于为经var等操作符声明,因为为全局变量。a为函数作用域中的变量。因此在外面访问a和b时,其值分别为ReferenceError: a is not defined和3。但是typeof检测未声明的变量不会抛出错误,会返回'undefined'。因此typeof a和typeof b分别返回'undefined'和'number'。`,
+                    },
+                    {
+                        numId: `題目：14`,
+                        quesTion: `var a = 6;
+setTimeout(function () {
+    a = 666;
+}, 0)
+console.log(a);
+`,
+                        consoleLog: `//输出
+
+6
+`,
+                        solMethods: `setTimeout为宏任务。即使设置延迟为0ms,也是等待微任务执行完才会执行。因此console.log(a)输出 6`
+                    },
+                    {
+                        numId: `題目：15`,
+                        quesTion: `function fn1() {
+    var a = 2
+    function fn2 () {
+      a++
+      console.log(a)
+    }
+    return fn2
+}
+var f = fn1()
+f()
+f()
+`,
+                        consoleLog: `// 输出
+
+3
+4
+`,
+                        solMethods: `由于fn1函数执行后返回函数fn2,此时产生了闭包。因此fn2中a访问的是fn1作用域中的变量a,因此第一次a++,之后a为3,第二次之后a为4。`
+                    },
+                    {
+                        numId: `題目：16`,
+                        quesTion: `var a = (function(foo){
+    return typeof foo.bar;
+})({foo:{bar:1}});
+
+console.log(a);
+`,
+                        consoleLog: `//输出
+
+undefined
+`,
+                        solMethods: `实参foo的值为{foo:{bar:1},因此typeof foo.bar为undefined。
+
+typeof foo.foo.bar为number。`
+                    },
+                    {
+                        numId: `題目：17`,
+                        quesTion: `function f(){
+    return f;
+}
+console.log(new f() instanceof f);
+                        
+`,
+                        consoleLog: `//输出
+
+false
+`,
+                        solMethods: `由于构造函数f的返回值为f。因此new f()的值为f。所以console.log(new f() instanceof f)为console.log(f instanceof f),即 false。`
+                    },
+                    {
+                        numId: `題目：18`,
+                        quesTion: `function A () {
+}
+A.prototype.n = 1
+
+var b = new A();
+
+A.prototype = {
+    n: 2,
+    m: 3
+}
+var c = new A()
+
+console.log(b.n, b.m);
+console.log(c.n, c.m);
+`,
+                        consoleLog: `// 输出
+
+1,undefined
+
+2,3
+                        
+`,
+                        solMethods: `var b = new A(); 实例化b时,A的prototype为`,
+                        consoleLog2: `A.prototype = {
+    constructor:A,
+    n:1
+}
+`,
+                        solMethods2:`当访问b.n和b.m时,通过原型链找到A.prototype指向的对象上,即b.n = 1,b.m = undefined。
+
+var c = new A(); 实例化c时,A的prototype为`,
+                        consoleLog3: `A.prototype = {
+    n: 2,
+    m: 3
+}
+`,
+                        solMethods3:`当访问a.n和a.m时,通过原型链找到A.prototype指向的对象上,此时A.prototype重写,因此a.n = 2,b.m = 3。`,
+                    },
+                    {
+                        numId: `題目：19`,
+                        quesTion: `var F = function(){}
+var O = {};
+Object.prototype.a = function(){
+    console.log('a')
+}
+Function.prototype.b = function(){
+    console.log('b')
+}
+var f = new F()
+
+F.a();  
+F.b();  
+O.a();
+O.b();  
+`,
+                        consoleLog: `// 输出
+
+a
+b
+a
+TypeError: o.b is not a function
+                        
+`,
+                        solMethods: `F为函数,它也能访问Object原型上的方法,O为对象,不能访问Function原型上的方法。
+F的原型链为:`,
+                        consoleLog2:`F => F.__proto__ => Function.prototype => Function.prototype.__proto__ => Object.prototype
+`,
+                        solMethods2: `由于Object.prototype在F的原型链上,所以F能访问Object.prototype上的属性和方法。即: F.a(),F.b()能正常访问。
+
+O的原型链为:`,
+                        consoleLog3:`O => O.__proto__ => Object.prototype
+`,
+                        solMethods3:`由于Function.prototype不在O的原型链上,因此O不能访问Function.prototype上的方法,即O.b()抛出错误。
+
+如果你对原型和原型链掌握的好,试着理解下面的示例:`,
+                        consoleLog4:`console.log(Object instanceof Function);
+
+console.log(Function instanceof Object);
+
+console.log(Function instanceof Function);
+`,
+                    },
+                    {
+                        numId: `題目：20`,
+                        quesTion: `function Person() {
+    getAge = function () {
+        console.log(10)
+    }
+    return this
+}
+
+Person.getAge = function () {
+    console.log(20)
+}
+
+Person.prototype.getAge = function () {
+    console.log(30)
+}
+
+var getAge = function () {
+    console.log(40)
+}
+
+function getAge() {
+    console.log(50)
+}
+
+
+Person.getAge();
+getAge();
+Person().getAge();
+new Person.getAge();
+getAge();
+new Person().getAge();
+`,
+                        consoleLog: `// 输出
+
+20
+40
+10
+20
+10
+30
+`,
+                        solMethods: `Person.getAge();此时执行的是Person函数上getAge方法。`,
+                        consoleLog2:`Person.getAge = function () {
+    console.log(20)
+}
+`,
+                        solMethods2:`所以输出:20。getAge();此时执行的是全局中的getAge方法。此时全局getAge方法为:`,
+                        consoleLog3:`function () {
+    console.log(40)
+}`,
+                        solMethods3:`所以输出:40。Person().getAge();由于 Person() 单独执行所以,作用域中的 this 绑定为 window, 相当于 window..getAge()。同上,执行的都是全局 getAge 方法,但是 Person 执行时,内部执行了`,
+                        consoleLog4:`getAge = function () {
+    console.log(10)
+}`,
+                        solMethods4:`因此全局getAge方法现在为:`,
+                        consoleLog5:`function () {
+    console.log(10)
+}`,
+                        solMethods5:`所以输出:10。new Person.getAge();此时相当于实例化Person.getAge这个函数,伪代码:`,
+                        consoleLog6:`var b = Person.getAge;
+new b();
+`,
+                        solMethods6:`所以输出:20。getAge();执行全局getAge方法,由于在Person().getAge()执行时把全局getAge方法赋值为:`,
+                        consoleLog7:`function () {
+    console.log(10)
+}`,
+                        solMethods7:`所以输出:10。new Person().getAge();此时调用的是Person原型上的getAge方法:`,
+                        consoleLog8:`Person.prototype.getAge = function () {
+    console.log(30)
+}`,
+                        solMethods8:`所以输出:30。这里要注意:1.变量提升及提升后再赋值。2.调用构造函数时,带()和不带()的区别。`,
+                    },
+                    {
+                        numId: `題目：21`,
+                        quesTion: `console.log(false.toString()); 
+console.log([1, 2, 3].toString()); 
+console.log(1.toString()); 
+console.log(5..toString());
+`,
+                        consoleLog: `// 输出
+
+'false'
+'1,2,3'
+Uncaught SyntaxError: Invalid or unexpected token
+'5'
+`,
+                        solMethods: `当执行1.toString();时,由于1.也是有效数字,因此此时变成(1.)toString()。没有用.调用toString方法,因此抛出错误。
+
+正确的应该是:`,
+                        consoleLog2:`1..toString();
+1 .toString();
+(1).toString();
+`,
+                    },
+                    {
+                        numId: `題目：22`,
+                        quesTion: `console.log(typeof NaN === 'number');
+`,
+                        consoleLog: `//输出
+
+true
+`,
+                        solMethods: `NaN为不是数字的数字。虽然它不是数字,但是它也是数字类型。`
+                    },
+                    {
+                        numId: `題目：23`,
+                        quesTion: `console.log(1 + "2" + "2");
+
+console.log(1 + +"2" + "2");
+
+console.log(1 + -"1" + "2");
+
+console.log(+"1" + "1" + "2"); 
+
+console.log( "A" - "B" + "2"); 
+
+console.log( "A" - "B" + 2); 
+`,
+                        consoleLog: `//输出
+
+'122'
+'32'
+'02'
+'112'
+'NaN2'
+NaN
+`,
+                        solMethods: `首先要明白两点:`,
+                        solMethods2:`+a,会把a转换为数字。-a会把a转换成数字的负值(如果能转换为数字的话,否则为NaN)。字符串与任何值相加都是字符串拼接。`,
+                        solMethods3:`console.log(1 + "2" + "2");简单的字符串拼接,即结果为:'122'。`,
+                        solMethods4:`console.log(1 + +"2" + "2");这里相当于console.log(1 + 2 + "2");,然后再字符串拼接。即结果为:'32'。`,
+                        solMethods5:`console.log(1 + -"1" + "2");这里相当于console.log(1 + -1 + "2");,然后再字符串拼接。即结果为:'02'。`,
+                        solMethods6:`console.log(+"1" + "1" + "2");这里相当于console.log(1 + "1" + "2");,然后再字符串拼接。即结果为:'112'。`,
+                        solMethods7:`console.log( "A" - "B" + "2");,由于'A' - 'B' = NaN,所以相当于console.log( NaN + "2");, 然后再字符串拼接。即结果为:'NaN2'。`,
+                        solMethods8:`console.log( "A" - "B" + 2);同上,相当于console.log(NaN + 2),由于NaN+任何值还是NaN,即结果为:NaN。`,
+                    },
+                    {
+                        numId: `題目：24`,
+                        quesTion: `var a = 666;
+console.log(++a);
+console.log(a++);
+`,
+                        consoleLog: `// 输出
+
+666
+668
+`,
+                        solMethods: `a++先执行取值操作,在执行+1。 此时输出666,随后a的值变为667。`,
+                        solMethods2:`++a先执行+1在执行取值操作。 此时a的值为667 + 1 = 668。`,
+                        solMethods3:`--a和a--同理。`,
+                        solMethods4:`使用这类运算符时要注意:`,
+                        solMethods5:`1）这里的++、--不能用作于常量。比如`,
+                        consoleLog6:`1++; // 抛出错误`,
+                        solMethods6:`2）如果a不是数字类型,会首先通过Number(a),将a转换为数字。再执行++等运算。`,
+                    },
+                    {
+                        numId: `題目：25`,
+                        quesTion: `console.log(typeof a);
+function a() {}
+var a;
+console.log(typeof a);
+`,
+                        consoleLog: `// 输出
+
+'function'
+'function'
+`,
+                        solMethods: `跟第4题类似。函数会优先于变量声明提前。因此会忽略var a。`
+                    },
+                    {
+                        numId: `題目：26`,
+                        quesTion: `var a;
+var b = 'undefined';
+console.log(typeof a);
+console.log(typeof b);
+console.log(typeof c);
+                        
+`,
+                        consoleLog: `// 输出
+'undefined'
+'string'
+'undefined'
+`,
+                        solMethods: `a为声明未赋值,默认为undefined,b的值为字符串'undefined',c为未定义。`,
+                        solMethods2:`typeof一个未定义的变量时,不会抛出错误,会返回'undefined'。注意typeof返回的都是字符串类型。`,
+                    },
+                    {
+                        numId: `題目：27`,
+                        quesTion: `var x = 1;
+if(function f(){}){
+    x += typeof f;
+}
+ 
+console.log(x);
+`,
+                        consoleLog: `//输出
+
+1undefined
+`,
+                        solMethods: `function f(){}当做if条件判断,其隐式转换后为true。`,
+                        solMethods2:`但是在()中的函数不会声明提升,因此f函数在外部是不存在的。`,
+                        solMethods3:`因此typeof f = 'undefined',所以x += typeof f,相当于x = x + 'undefined'为'1undefined'。`,
+                    },
+                    {
+                        numId: `題目：28`,
+                        quesTion: `var str = "123abc";
+console.log(typeof str++);
+`,
+                        consoleLog: `// 输出
+
+'number'
+`,
+                        solMethods: `在24题解析时提到,使用++运算符时(无论是前置还是后置),如果变量不是数字类型,会首先用Number()转换为数字。`,
+                        solMethods2:`因此typeof str++相当于typeof Number(str)++。由于后置的++是先取值后计算,因此相当于typeof Number("123abc")。`,
+                        solMethods3:`即typeof NaN,所以输出'number'。`,
+                    },
+                    {
+                        numId: `題目：29`,
+                        quesTion: `console.log('b' + 'a' + +'a'+'a');
+`,
+                        consoleLog: `// 输出
+
+baNaNa
+`,
+                        solMethods: `'b' + 'a' + +'a'+'a'相当于'ba' + +'a'+'a',+'a'会将'a'转换为数字类型,即+'a' = NaN。`,
+                        solMethods2:`所以最终得到'ba' + NaN +'a',通过字符串拼接,结果为:baNaNa。`,
+                    },
+                    {
+                        numId: `題目：30`,
+                        quesTion: `var obj = {n: 1};
+function fn2(a) {
+    a.n = 2;
+}
+fn2(obj);
+console.log(obj.n);
+`,
+                        consoleLog: `// 输出
+
+4
+2
+2
+`,
+                        solMethods: `函数传递参数时,如果是基本类型为值传递,如果是引用类型,为引用传递。`,
+                        solMethods2:`因此实参a和obj指向对象的一个引用。`,
+                        solMethods3:`当执行a.n,实际上共同引用的对象修改了,添加了个n属性,因此obj.n为2。`,
+                    },
+                    {
+                        numId: `題目：31`,
+                        quesTion: `var x = 10;
+function fn() {
+    console.log(x);
+}
+function show(f) {
+    var x = 20;
+    f();
+}
+show(fn);
+`,
+                        consoleLog: `// 输出
+
+10
+`,
+                        solMethods: `JavaScript采用的是词法作用域,它规定了函数内访问变量时,查找变量是从函数声明的位置向外层作用域中查找,而不是从调用函数的位置开始向上查找。`,
+                        solMethods2:`因此fn函数内部访问的x是全局作用域中的x,而不是show函数作用域中的x。`,
+                    },
+                    {
+                        numId: `題目：32`,
+                        quesTion: `Object.prototype.bar = 1; 
+var foo = {
+    goo: undefined
+};
+
+console.log(foo.bar);
+console.log('bar' in foo);
+
+console.log(foo.hasOwnProperty('bar'));
+console.log(foo.hasOwnProperty('goo'));
+`,
+                        consoleLog: `//输出
+
+1
+true
+false
+true
+                        
+`,
+                        solMethods: `in操作符:检测指定对象(右边)原型链上是否有对应的属性值。`,
+                        solMethods2:`hasOwnProperty方法:检测指定对象自身上是否有对应的属性值。`,
+                        solMethods3:`两者的区别在于in会查找原型链,而hasOwnProperty不会。`,
+                        solMethods4:`示例中对象foo自身上存在goo属性,而它的原型链上存在bar属性。`,
+                        solMethods5:`通过这个例子要注意如果要判断foo上是否有属性goo,不能简单的通过if(foo.goo){}判断,因为goo的值可能为undefined或者其他可能隐式转换为false的值。`,
+                    },
+                    {
+                        numId: `題目：33`,
+                        quesTion: `Object.prototype.bar = 1;
+
+var foo = {
+    moo: 2
+};
+for(var i in foo) {
+    console.log(i); 
+}
+`,
+                        consoleLog: `// 输出
+
+'moo'
+'bar'
+`,
+                        solMethods: `for...in...遍历对象上除了Symbol以外的可枚举属性,包括原型链上的属性。`,
+                    },
+                    {
+                        numId: `題目：34`,
+                        quesTion: `function foo1() {
+    return {
+        bar: "hello"
+    };
+}
+function foo2() {
+    return 
+    {
+        bar: "hello"
+    };
+}
+console.log(foo1());
+console.log(foo2());
+`,
+                        consoleLog: `// 输出
+
+{ bar: "hello" }
+
+undefined
+`,
+                        solMethods: `两个函数唯一区别就是return后面跟的值,一个换行一个不换行。`,
+                        solMethods2:`当我们书写代码时忘记在结尾书写;时,JavaScript解析器会根据一定规则自动补上;。`,
+                        consoleLog3:`return
+{
+    bar: "hello"
+}
+=> 会被解析成
+return;
+{
+    bar: "hello"
+};`,
+                        solMethods3:`因此函数执行后会返回undefined。`,
+                    },
+                    {
+                        numId: `題目：35`,
+                        quesTion: `console.log((function(){ return typeof arguments; })());
+`,
+                        consoleLog: `// 输出
+
+'object'`,
+                        solMethods: `arguments为类数组,类型为object。因此typeof arguments = 'object'。`
+                    },
+                    {
+                        numId: `題目：36`,
+                        quesTion: `console.log(Boolean(false));
+console.log(Boolean('0'));
+console.log(Boolean(''));
+console.log(Boolean(NaN));
+`,
+                        consoleLog: `//输出
+
+false
+true
+false
+fasle
+`,
+                        solMethods: `只有下面几种值在转换为布尔值时为false:`,
+                        consoleLog2:`+0,-0,NaN,false,'',null,undefined。`,
+                        solMethods2:`除此之外的值在转换为布尔值的时候全部为true。`,
+                    },
+                    {
+                        numId: `題目：37`,
+                        quesTion: `console.log(Array(3));
+
+console.log(Array(2,3));`,
+                        consoleLog:`// 输出
+
+[empty × 3] 
+
+[2,3]
+`,
+                        solMethods: `使用Array()创建数组时,要注意传入的值的类型和数量。`,
+                    },
+                    {
+                        numId: `題目：38`,
+                        quesTion: `console.log(0.1 + 0.2 == 0.3)；`,
+                        consoleLog: `// 输出
+
+false
+`,
+                        solMethods: ``
+                    },
+                    {
+                        numId: `題目：39`,
+                        quesTion: `var a=[1, 2, 3];
+console.log(a.join());
+`,
+                        consoleLog: `//输出
+
+1,2,3
+`,
+                        solMethods: `join方法如果省略参数,默认以,分隔。`
+                    },
+                    {
+                        numId: `題目：40`,
+                        quesTion: `var a = [3];
+var b = [1];
+console.log(a - b); 
+                        
+`,
+                        consoleLog: `// 输出
+
+2
+`,
+                        solMethods: `在执行a - b时,a和b都要转换为数字。`,
+                        solMethods2:`首先a先转换为字符串,[3] => [3].toString() => '3',然后Number(3) => 3。b同理。`,
+                        solMethods3:`因此转换之后为3 - 1 = 3。`,
                     },
                 ],
             }
         })
-    </script>
-
-    <a href="https://chowdera.com/2022/03/202203110647531104.html">詳解參考</a>
-    <script>
-        var a = {n:1};
-        var b = a;
-        a.x = a = {n:2};
-        console.log(a.n,b.n);
-        console.log(a.x,b.x); 
     </script>
     <!-- script -->
     @@include('layout/script.html')
