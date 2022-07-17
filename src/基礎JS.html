@@ -356,7 +356,8 @@ f()
 3
 4
 `,
-                        solMethods: `由于fn1函数执行后返回函数fn2,此时产生了闭包。因此fn2中a访问的是fn1作用域中的变量a,因此第一次a++,之后a为3,第二次之后a为4。`
+                        solMethods: `由于fn1函数执行后返回函数fn2,此时产生了闭包。因此fn2中a访问的是fn1作用域中的变量a,因此第一次a++,之后a为3,第二次之后a为4。要有return fn2，如果沒有會傳不出f( f is not a function)`,
+                        hrefLink:`https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Statements/return`,
                     },
                     {
                         numId: `題目：16`,
@@ -370,9 +371,7 @@ console.log(a);
 
 undefined
 `,
-                        solMethods: `实参foo的值为{foo:{bar:1},因此typeof foo.bar为undefined。
-
-typeof foo.foo.bar为number。`
+                        solMethods: `一開始function(foo)=>裡面的foo就是一個物件=>值为{foo:{bar:1},前提是有寫({foo:bar:1}}),否則foo會是函式f(foo),因此typeof foo.bar为undefined。typeof foo.foo.bar为number。`,
                     },
                     {
                         numId: `題目：17`,
@@ -386,7 +385,9 @@ console.log(new f() instanceof f);
 
 false
 `,
-                        solMethods: `由于构造函数f的返回值为f。因此new f()的值为f。所以console.log(new f() instanceof f)为console.log(f instanceof f),即 false。`
+                        solMethods: `由于构造函数f的返回值为f。因此new f()的值为f。所以console.log(new f() instanceof f)为console.log(f instanceof f),即 false。instanceof只能用來判斷兩個比較對象是否屬於實例關係，無法明確指出具體屬於哪種類型。`,
+                        hrefLink:`https://medium.com/@mengchiang000/js%E5%9F%BA%E6%9C%AC%E8%A7%80%E5%BF%B5-typeof-vs-instanceof-4dcb89e315df`,
+
                     },
                     {
                         numId: `題目：18`,
@@ -426,7 +427,8 @@ var c = new A(); 实例化c时,A的prototype为`,
     m: 3
 }
 `,
-                        solMethods3:`当访问a.n和a.m时,通过原型链找到A.prototype指向的对象上,此时A.prototype重写,因此a.n = 2,b.m = 3。`,
+                        solMethods3:`当访问a.n和a.m时,通过原型链找到A.prototype指向的对象上,此时A.prototype重写,因此c.n = 2,c.m = 3。`,
+                        hrefLink:`https://iter01.com/1681.html`,
                     },
                     {
                         numId: `題目：19`,
