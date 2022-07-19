@@ -470,11 +470,11 @@ O的原型鏈為:`,
                         solMethods3:`由於Function.prototype不在O的原型鏈上,因此O不能訪問Function.prototype上的方法,即O.b()抛出錯誤。
 
 如果你對原型和原型鏈掌握的好,試著理解下面的案例:`,
-                        consoleLog4:`console.log(Object instanceof Function);
+                        consoleLog4:`console.log(Object instanceof Function);//true
 
-console.log(Function instanceof Object);
+console.log(Function instanceof Object);//true
 
-console.log(Function instanceof Function);
+console.log(Function instanceof Function);//true
 `,
                     },
                     {
@@ -570,7 +570,8 @@ Uncaught SyntaxError: Invalid or unexpected token
                         consoleLog2:`1..toString();
 1 .toString();
 (1).toString();
-`,
+`,                      hrefLink:`https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toString`,
+
                     },
                     {
                         numId: `題目：22`,
@@ -611,14 +612,14 @@ NaN
                         solMethods4:`console.log(1 + +"2" + "2");這裡相當於console.log(1 + 2 + "2");,然後再字符串拼接。即结果為:'32'。`,
                         solMethods5:`console.log(1 + -"1" + "2");這裡相當於console.log(1 + -1 + "2");,然後再字符串拼接。即结果為:'02'。`,
                         solMethods6:`console.log(+"1" + "1" + "2");這裡相當於console.log(1 + "1" + "2");,然後再字符串拼接。即结果為:'112'。`,
-                        solMethods7:`console.log( "A" - "B" + "2");,由於'A' - 'B' = NaN,所以相當於console.log( NaN + "2");, 然後再字符串拼接。即结果為:'NaN2'。`,
+                        solMethods7:`console.log( "A" - "B" + "2");,由於'A' - 'B' = NaN,所以相當於console.log( NaN + "2");, 然後再字符串拼接。即结果為:'NaN2'。如果是"A"+"B"=字串相加=AB2`,
                         solMethods8:`console.log( "A" - "B" + 2);同上,相當於console.log(NaN + 2),由於NaN+任何值還是NaN,即结果為:NaN。`,
                     },
                     {
                         numId: `題目：24`,
                         quesTion: `var a = 666;
-console.log(++a);
 console.log(a++);
+console.log(++a);
 `,
                         consoleLog: `// 輸出
 
@@ -716,8 +717,6 @@ console.log(obj.n);
 `,
                         consoleLog: `// 輸出
 
-4
-2
 2
 `,
                         solMethods: `函式傳遞参數時,如果是基本類型為值傳遞,如果是引用類型,為引用傳遞。`,
